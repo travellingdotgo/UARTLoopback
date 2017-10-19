@@ -46,6 +46,8 @@ public class UARTLoopbackActivity extends Activity {
 	/* graphical objects */
 	EditText readText;
 	EditText writeText;
+
+	/*
 	Spinner baudSpinner;;
 	Spinner stopSpinner;
 	Spinner dataSpinner;
@@ -53,6 +55,7 @@ public class UARTLoopbackActivity extends Activity {
 	Spinner flowSpinner;
 
 	Button writeButton, configButton;
+	*/
 
 	/* local variables */
 	byte[] writeBuffer;
@@ -90,10 +93,12 @@ public class UARTLoopbackActivity extends Activity {
 
 		global_context = this;
 
+		/*
 		configButton = (Button) findViewById(R.id.configButton);
 		writeButton = (Button) findViewById(R.id.WriteButton);
 		
 		originalDrawable = configButton.getBackground();
+		*/
 
 		/* allocate buffer */
 		writeBuffer = new byte[64];
@@ -101,7 +106,7 @@ public class UARTLoopbackActivity extends Activity {
 		readBufferToChar = new char[4096]; 
 		actualNumBytes = new int[1];
 
-		/* setup the baud rate list */
+		/* setup the baud rate list
 		baudSpinner = (Spinner) findViewById(R.id.baudRateValue);
 		ArrayAdapter<CharSequence> baudAdapter = ArrayAdapter.createFromResource(this, R.array.baud_rate,
 				R.layout.my_spinner_textview);
@@ -109,20 +114,22 @@ public class UARTLoopbackActivity extends Activity {
 		baudSpinner.setAdapter(baudAdapter);
 		baudSpinner.setGravity(0x10);
 		baudSpinner.setSelection(4);
+		*/
 		/* by default it is 9600 */
 		baudRate = 9600;
 
-		/* stop bits */
+		/* stop bits
 		stopSpinner = (Spinner) findViewById(R.id.stopBitValue);
 		ArrayAdapter<CharSequence> stopAdapter = ArrayAdapter.createFromResource(this, R.array.stop_bits,
 						R.layout.my_spinner_textview);
 		stopAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
 		stopSpinner.setAdapter(stopAdapter);
 		stopSpinner.setGravity(0x01);
+		*/
 		/* default is stop bit 1 */
 		stopBit = 1;
 
-		/* daat bits */
+		/* daat bits
 		dataSpinner = (Spinner) findViewById(R.id.dataBitValue);
 		ArrayAdapter<CharSequence> dataAdapter = ArrayAdapter.createFromResource(this, R.array.data_bits,
 						R.layout.my_spinner_textview);
@@ -130,40 +137,31 @@ public class UARTLoopbackActivity extends Activity {
 		dataSpinner.setAdapter(dataAdapter);
 		dataSpinner.setGravity(0x11);
 		dataSpinner.setSelection(1);
+		*/
 		/* default data bit is 8 bit */
 		dataBit = 8;
 
-		/* parity */
+		/* parity
 		paritySpinner = (Spinner) findViewById(R.id.parityValue);
 		ArrayAdapter<CharSequence> parityAdapter = ArrayAdapter.createFromResource(this, R.array.parity,
 						R.layout.my_spinner_textview);
 		parityAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
 		paritySpinner.setAdapter(parityAdapter);
 		paritySpinner.setGravity(0x11);
+		*/
 		/* default is none */
 		parity = 0;
 
-		/* flow control */
+		/* flow control
 		flowSpinner = (Spinner) findViewById(R.id.flowControlValue);
 		ArrayAdapter<CharSequence> flowAdapter = ArrayAdapter.createFromResource(this, R.array.flow_control,
 						R.layout.my_spinner_textview);
 		flowAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
 		flowSpinner.setAdapter(flowAdapter);
 		flowSpinner.setGravity(0x11);
+		*/
 		/* default flow control is is none */
 		flowControl = 0;
-
-
-		/* set the adapter listeners for baud */
-		baudSpinner.setOnItemSelectedListener(new MyOnBaudSelectedListener());
-		/* set the adapter listeners for stop bits */
-		stopSpinner.setOnItemSelectedListener(new MyOnStopSelectedListener());
-		/* set the adapter listeners for data bits */
-		dataSpinner.setOnItemSelectedListener(new MyOnDataSelectedListener());
-		/* set the adapter listeners for parity */
-		paritySpinner.setOnItemSelectedListener(new MyOnParitySelectedListener());
-		/* set the adapter listeners for flow control */
-		flowSpinner.setOnItemSelectedListener(new MyOnFlowSelectedListener());		
 		
 		act_string = getIntent().getAction();
 		if( -1 != act_string.indexOf("android.intent.action.MAIN")){
@@ -172,7 +170,8 @@ public class UARTLoopbackActivity extends Activity {
 		else if( -1 != act_string.indexOf("android.hardware.usb.action.USB_ACCESSORY_ATTACHED")){
 			cleanPreference();
 		}		
-		
+
+		/*
 		configButton.setOnClickListener(new View.OnClickListener() {
 
 			// @Override
@@ -191,8 +190,9 @@ public class UARTLoopbackActivity extends Activity {
 			}
 
 		});
+		*/
 
-		/* handle write click */
+		/* handle write click
 		writeButton.setOnClickListener(new View.OnClickListener() {
 
 			// @Override
@@ -204,6 +204,7 @@ public class UARTLoopbackActivity extends Activity {
 				}
 			}
 		});
+		*/
 
 		uartInterface = new FT311UARTInterface(this, sharePrefSettings);
 
@@ -254,6 +255,7 @@ public class UARTLoopbackActivity extends Activity {
 		parity = (byte)sharePrefSettings.getInt("parity", 0);
 		flowControl = (byte)sharePrefSettings.getInt("flowControl", 0);
 
+		/*
 		if(true == bConfiged){			
 			configButton.setText("Configured");
 			configButton.setBackgroundColor(0xff888888); // color GRAY:0xff888888
@@ -313,6 +315,7 @@ public class UARTLoopbackActivity extends Activity {
 			flowSpinner.setSelection(0);
 			configButton.setBackgroundDrawable(originalDrawable);			
 		}
+		*/
 	}
 	
 	
