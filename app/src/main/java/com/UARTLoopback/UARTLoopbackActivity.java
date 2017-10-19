@@ -44,7 +44,6 @@ public class UARTLoopbackActivity extends Activity {
 	/* declare a FT311 UART interface variable */
 	public FT311UARTInterface uartInterface;
 	/* graphical objects */
-	EditText readText;
 	EditText writeText;
 
 	/*
@@ -88,7 +87,6 @@ public class UARTLoopbackActivity extends Activity {
 		sharePrefSettings = getSharedPreferences("UARTLBPref", 0);
 		//cleanPreference();
 		/* create editable text objects */
-		readText = (EditText) findViewById(R.id.ReadValues);
 		writeText = (EditText) findViewById(R.id.WriteValues);
 
 		global_context = this;
@@ -440,16 +438,17 @@ public class UARTLoopbackActivity extends Activity {
 		super.onDestroy();
 	}
 
-
 	final Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			
+
+			/*
 			for(int i=0; i<actualNumBytes[0]; i++)
 			{
 				readBufferToChar[i] = (char)readBuffer[i];
 			}
 			appendData(readBufferToChar, actualNumBytes[0]);
+			*/
 		}
 	};
 
@@ -491,6 +490,7 @@ public class UARTLoopbackActivity extends Activity {
 		return super.onCreateOptionsMenu(myMenu);
 	}	
 
+	/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
@@ -534,6 +534,7 @@ public class UARTLoopbackActivity extends Activity {
  
         return super.onOptionsItemSelected(item);
     }
+    */
     
     public void writeData()
     {
@@ -687,30 +688,9 @@ public class UARTLoopbackActivity extends Activity {
     {
     	Toast.makeText(global_context, str, showTime).show();
     }
-    
-    public void appendData(String s)
-    {
-    	switch(inputFormat)
-    	{
-    	case FORMAT_HEX:
-    		{
-    			readText.append("Hex");    		
-    		}
-    		break;
-    		
-    	case FORMAT_DEC:
-    		{
-    			readText.append("Dec");
-    		}
-    		break;
-    		
-    	case FORMAT_ASCII:    		
-    	default:
-    		readText.append(s);
-    		break;
-    	}
-    }
-    
+
+
+	/*
     public void appendData(char[] data, int len)
     {
     	if(len >= 1)    		
@@ -777,4 +757,5 @@ public class UARTLoopbackActivity extends Activity {
     		break;
     	}
     }
+    */
 }
